@@ -1,7 +1,5 @@
 package com.wordpress.excelenteadventura.steamgamefinder;
 
-import java.net.MalformedURLException;
-
 /**
  * A class that extends SteamUser which is used to store data about the users
  * friends.
@@ -9,8 +7,12 @@ import java.net.MalformedURLException;
  */
 public class SteamFriend extends SteamUser {
 
-    public SteamFriend(String steamID) throws MalformedURLException {
+    public SteamFriend(String steamID) {
         super(steamID);
     }
+
+//    public SteamFriend(String steamID, String userName, int onlineStatus, int imageResourceID) throws MalformedURLException{
+//        super(steamID, userName, onlineStatus, imageResourceID);
+//    }
 
 }

@@ -24,13 +24,14 @@ public class SteamUser implements Comparable<SteamUser>{
     private final String steamID;
     private String userName;
     private int onlineStatus;
+    private int imageResourceID;
     private URL[] profilePicture;
     private Map<String, SteamGame> gameMap;
     
     protected static final String path = "../Steam Game Finder V2/data/";
     protected static final String APIKey = "D41746705B55F8AC2620F6910ACE56CF";
-    protected final URL playerSummaryData;
-    protected final URL gameStatsData;
+//    protected final URL playerSummaryData;
+//    protected final URL gameStatsData;
     
     public static final Comparator<SteamUser> BY_ONLINESTATUS = new ByOnlineStatus();
     
@@ -40,13 +41,36 @@ public class SteamUser implements Comparable<SteamUser>{
      * @param steamID
      * @throws MalformedURLException
      */
-    public SteamUser(String steamID) throws MalformedURLException {
+    public SteamUser(String steamID){
         this.steamID = steamID;
-        playerSummaryData = new URL("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" 
-                                + APIKey + "&steamids=" + steamID + "&format=json");
-        gameStatsData = new URL("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" 
-                                + APIKey + "&steamid=" + steamID + "&include_appinfo=1&format=json");
+//        try {
+//            playerSummaryData = new URL("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="
+//                    + APIKey + "&steamids=" + steamID + "&format=json");
+//            gameStatsData = new URL("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="
+//                    + APIKey + "&steamid=" + steamID + "&include_appinfo=1&format=json");
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
     }
+
+
+//    /**
+//     * Temporary constructor because downloading isn't implemented yet.
+//     * Remember to remove from Steamfriend class too, when removing this.
+//     * Resource id needs to be fixed too.
+//     * @param userName
+//     * @param onlineStatus
+//     */
+//    public SteamUser(String steamID, String userName, int onlineStatus, int imageResourceID) throws MalformedURLException {
+//        this.steamID = steamID;
+//        this.userName = userName;
+//        this.onlineStatus = onlineStatus;
+//        this.imageResourceID = imageResourceID;
+//        playerSummaryData = new URL("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="
+//                + APIKey + "&steamids=" + steamID + "&format=json");
+//        gameStatsData = new URL("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="
+//                + APIKey + "&steamid=" + steamID + "&include_appinfo=1&format=json");
+//    }
     
 //    /**
 //     * Downloads the users player summary and game data and saves it as JSON files
@@ -199,7 +223,24 @@ public class SteamUser implements Comparable<SteamUser>{
                 "Looking To Trade", "Looking To Play"};
         return status[onlineStatus];
     }
-    
+
+    /**
+     * Setter for users imageResourceID
+     * @param imageResourceID
+     */
+    public void setImageResourceID(int imageResourceID) {
+        this.imageResourceID = imageResourceID;
+    }
+
+
+    /**
+     * Getter for users imageResourceId.
+     * @return int representing resourceID
+     */
+    public int getImageResourceId() {
+        return imageResourceID;
+    }
+
     /**
      * Setter for the usersProfilePicture
      * @param addresses - array of strings containing URLs where the {small, medium, large} version of the
