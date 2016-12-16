@@ -46,8 +46,8 @@ public class MainUser extends SteamUser{
      * Gets a list of users friends sorted alphabetically and by online status.
      * @return an ArrayList containing SteamFriend objects that are the users friends.
      */
-    public List<SteamFriend> getFriendsList() {
-        List<SteamFriend> friendsList = new ArrayList<SteamFriend>(getFriendsMap().values());
+    public ArrayList<SteamFriend> getFriendsList() {
+        ArrayList<SteamFriend> friendsList = new ArrayList<SteamFriend>(getFriendsMap().values());
         Collections.sort(friendsList);
         Collections.sort(friendsList, SteamUser.BY_ONLINESTATUS);
         return friendsList;

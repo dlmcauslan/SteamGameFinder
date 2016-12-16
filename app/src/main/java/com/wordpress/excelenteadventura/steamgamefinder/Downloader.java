@@ -23,7 +23,7 @@ import java.util.Map;
  * friend data, and game data.
  * @author DLMcAuslan
  */
-public class Downloader {
+public final class Downloader {
     private static final String APIKey = "D41746705B55F8AC2620F6910ACE56CF";
     private static final String LOG_TAG = Downloader.class.getSimpleName();
     
@@ -39,6 +39,8 @@ public class Downloader {
         // Gets the URL containing the users player summary data.
         String urlString = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" 
                 + APIKey + "&steamids=" + user.getID() + "&format=json";
+
+        Log.v(LOG_TAG, urlString);
         URL playerSummaryData = createUrl(urlString);
         
         // Make Http request and set user data from the returned JSON object
@@ -60,8 +62,7 @@ public class Downloader {
             String errorMessage = "Error setting user data.\nIs the steamID correct?";
             Log.e(LOG_TAG, errorMessage, e);
 //            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-            return;
-        } 
+        }
     }
     
     /**
@@ -194,6 +195,7 @@ public class Downloader {
                 String jsonResponse = readFromStream(inputStream);
                 jsonObject = new JSONObject(jsonResponse);
             } else {
+
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException | JSONException e) {

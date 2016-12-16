@@ -1,6 +1,7 @@
 package com.wordpress.excelenteadventura.steamgamefinder;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,14 @@ public class FriendsListAdaptor extends ArrayAdapter<SteamFriend> {
         friendName.setText(currentFriend.getUserName());
         TextView onlineStatus = (TextView) listItemView.findViewById(R.id.text_online_status);
         onlineStatus.setText(currentFriend.getOnlineString());
+        // Set colour depending on online status
+        if (currentFriend.getOnlineStatus() == 0) {
+            friendName.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+            onlineStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+        } else {
+            friendName.setTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+            onlineStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+        }
 
         // Return the whole list item layout so that it can be shown in the listview.
         return listItemView;

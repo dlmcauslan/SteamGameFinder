@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:id="@+id/text_main_user"
-                android:text="El Mavericko"
+                android:text="Main User"
                 android:textSize="28sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
