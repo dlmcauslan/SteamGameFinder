@@ -2,6 +2,7 @@ package com.wordpress.excelenteadventura.steamgamefinder;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,18 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        // Setup Floating Action Button to open next activity (not created yet)
+        FloatingActionButton fab = (FloatingActionButton) fragmentView.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Uncomment this and replace newClass.class with the name of the activity we're linking to
+                // Not sure whether MainFragment.this is correct either.
+//                Intent intent = new Intent(MainFragment.this, newClass.class);
+//                startActivity(intent);
+            }
+        });
 
         // Create some fake steam friends to add populate array list
         SteamFriend s = new SteamFriend("123");
