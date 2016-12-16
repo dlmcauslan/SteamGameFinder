@@ -56,13 +56,26 @@ public class SteamGame implements Comparable<SteamGame>{
      * @return a string containing the amount of time played in days, hours, minutes.
      */
     public String getTimePlayed() {
-        int days = minutesPlayed/(24*60);
+        int days = minutesPlayed / (24 * 60);
         int hours = minutesPlayed % (24 * 60) / (60);
         int minutes = minutesPlayed % 60;
+        
         String timeString;
-        if (days == 0) timeString = hours + " hours, " + minutes + " minutes.";
-        if (days == 0 && hours == 0) timeString =  minutes + " minutes.";
-        else timeString = days + " days, " + hours + " hours, " + minutes + " minutes.";
+        String dayString;
+        String hourString;
+        String minuteString;
+        
+        if (days == 1) dayString = days + " day, ";
+        else dayString = days + " days, ";
+        if (hours == 1) hourString = hours + " hour, ";
+        else hourString = hours + " hours, ";
+        if (minutes == 1) minuteString = minutes + " minute.";
+        else minuteString = minutes + " minutes.";
+        
+        if (days == 0) timeString = hourString + minuteString;
+        if (days == 0 && hours == 0) timeString =  minuteString;
+        else timeString = dayString + hourString + minuteString;
+        
         return timeString;
     }
     

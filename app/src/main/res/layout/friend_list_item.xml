@@ -10,7 +10,7 @@
         android:layout_height="64dp"
         android:scaleType="fitCenter"
         android:id="@+id/friend_icon"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -18,7 +18,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background = "@color/colorPrimaryDark"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:padding="4dp">
 
         <TextView
             android:layout_width="match_parent"

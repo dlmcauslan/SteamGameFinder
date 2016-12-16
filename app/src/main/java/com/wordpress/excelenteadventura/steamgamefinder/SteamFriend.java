@@ -5,14 +5,10 @@ package com.wordpress.excelenteadventura.steamgamefinder;
  * friends.
  * @author DLMcAuslan
  */
-public class SteamFriend extends SteamUser {
+public class SteamFriend extends SteamUser{
 
     public SteamFriend(String steamID) {
         super(steamID);
     }
-
-//    public SteamFriend(String steamID, String userName, int onlineStatus, int imageResourceID) throws MalformedURLException{
-//        super(steamID, userName, onlineStatus, imageResourceID);
-//    }
 
 }

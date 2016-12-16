@@ -19,11 +19,12 @@
             android:background="@color/colorPrimary">
 
             <ImageView
-                android:layout_width="88dp"
-                android:layout_height="88dp"
+                android:layout_width="116dp"
+                android:layout_height="116dp"
                 android:scaleType="fitCenter"
                 android:id="@+id/friend_icon"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:src="@mipmap/ic_launcher"
+                android:padding="8dp"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -32,7 +33,7 @@
                 android:gravity="center_vertical"
                 android:id="@+id/text_main_user"
                 android:text="El Mavericko"
-                android:textSize="22sp"
+                android:textSize="28sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
 
@@ -40,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/friends_list_view"
-            android:padding="4dp"></ListView>
+            android:padding="12dp"/>
 
     </LinearLayout>
 
@@ -52,6 +53,7 @@
         android:id="@+id/floatingActionButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         app:backgroundTint="@color/colorAccent"
         app:elevation="4dp" />

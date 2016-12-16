@@ -6,13 +6,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-//import javax.json.Json;
-//import javax.json.JsonArray;
-//import javax.json.JsonObject;
-//import javax.json.JsonReader;
-//
-//import org.apache.commons.io.FileUtils;
-
 /**
  * Class which stores information about a steam user such as their
  * steamID, userName, onlineStatus, a link to their profile picture
@@ -28,147 +21,18 @@ public class SteamUser implements Comparable<SteamUser>{
     private URL[] profilePicture;
     private Map<String, SteamGame> gameMap;
     
-    protected static final String path = "../Steam Game Finder V2/data/";
-    protected static final String APIKey = "D41746705B55F8AC2620F6910ACE56CF";
-//    protected final URL playerSummaryData;
-//    protected final URL gameStatsData;
-    
     public static final Comparator<SteamUser> BY_ONLINESTATUS = new ByOnlineStatus();
+    
     
     /**
      * Class constructor that takes in the users SteamID as a string and creates the URLs necessary
      * to access their data
      * @param steamID
-     * @throws MalformedURLException
      */
-    public SteamUser(String steamID){
+    public SteamUser(String steamID) {
         this.steamID = steamID;
-//        try {
-//            playerSummaryData = new URL("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="
-//                    + APIKey + "&steamids=" + steamID + "&format=json");
-//            gameStatsData = new URL("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="
-//                    + APIKey + "&steamid=" + steamID + "&include_appinfo=1&format=json");
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
     }
-
-
-//    /**
-//     * Temporary constructor because downloading isn't implemented yet.
-//     * Remember to remove from Steamfriend class too, when removing this.
-//     * Resource id needs to be fixed too.
-//     * @param userName
-//     * @param onlineStatus
-//     */
-//    public SteamUser(String steamID, String userName, int onlineStatus, int imageResourceID) throws MalformedURLException {
-//        this.steamID = steamID;
-//        this.userName = userName;
-//        this.onlineStatus = onlineStatus;
-//        this.imageResourceID = imageResourceID;
-//        playerSummaryData = new URL("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="
-//                + APIKey + "&steamids=" + steamID + "&format=json");
-//        gameStatsData = new URL("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="
-//                + APIKey + "&steamid=" + steamID + "&include_appinfo=1&format=json");
-//    }
     
-//    /**
-//     * Downloads the users player summary and game data and saves it as JSON files
-//     * @throws IOException
-//     */
-//    public void downloadUserData() throws IOException {
-//        String userID = getID();
-//        downloadURL(playerSummaryData, new File(path + userID + "SummaryData.json"));
-//        downloadURL(gameStatsData, new File(path + userID + "GameData.json"));
-//    }
-//
-//    /**
-//     * Helper method to download web data to file
-//     * @param url
-//     * @param fName - file name to store the data
-//     * @throws IOException
-//     */
-//    protected static void downloadURL(URL url, File fName) throws IOException {
-//        FileUtils.copyURLToFile(url, fName);
-//    }
-    
-//    /**
-//     * Sets the player summary data, either from web or from file. If there is no
-//     * locally hosted data file the data is downloaded, and the data is saved.
-//     * @param dataFromWeb - boolean whether the data is coming from the web (true)
-//     *                      or from a locally stored file (false)
-//     * @throws IOException
-//     */
-//    public void setUserData(boolean dataFromWeb) throws IOException {
-//        // Are we getting the data from the web, or from file
-//        InputStream is;
-//        String userID = getID();
-//        if (!dataFromWeb) {
-//            try {
-//                is = new FileInputStream(path + userID + "SummaryData.json");
-//            } catch(FileNotFoundException f) {
-//                downloadURL(playerSummaryData, new File(path + userID + "SummaryData.json"));
-//                is = new FileInputStream(path + userID + "SummaryData.json");
-//            }
-//        } else {
-//            is = playerSummaryData.openStream();
-//        }
-//        // Open JSON reader and set user data from JSON file
-//        try (JsonReader rdr = Json.createReader(is)) {
-//            JsonObject obj = rdr.readObject();
-//            JsonObject user = obj.getJsonObject("response").getJsonArray("players").getJsonObject(0);
-//            setUserName(user.getString("personaname"));
-//            setOnlineStatus(user.getInt("personastate"));
-//            String[] profilePictures = new String[] { user.getString("avatar"),
-//                                                      user.getString("avatarmedium"),
-//                                                      user.getString("avatarfull") };
-//            setProfilePicture(profilePictures);
-//        } finally {
-//            if (is != null) is.close();
-//        }
-//    }
-    
-//    /**
-//     * Sets the player game data, either from web or from file. If there is no
-//     * locally hosted data file the data is downloaded, and the data is saved.
-//     * @param dataFromWeb - boolean whether the data is coming from the web (true)
-//     *                      or from a locally stored file (false)
-//     * @throws IOException
-//     */
-//    public void setGameData(boolean dataFromWeb) throws IOException {
-//        Map<String, SteamGame> gameMap = new HashMap<String, SteamGame>();
-//        // Load game data either from web, or from file
-//        InputStream is;
-//        String userID = getID();
-//        if (!dataFromWeb) {
-//            try {
-//                is = new FileInputStream(path + userID + "GameData.json");
-//            } catch(FileNotFoundException f) {
-//                downloadURL(gameStatsData, new File(path + userID + "GameData.json"));
-//                is = new FileInputStream(path + userID + "GameData.json");
-//            }
-//        } else {
-//            is = gameStatsData.openStream();
-//        }
-//
-//     // Open JSON reader and set game data from JSON file
-//        try (JsonReader rdr = Json.createReader(is)) {
-//            JsonObject obj = rdr.readObject();
-//            JsonArray jGames = obj.getJsonObject("response").getJsonArray("games");
-//            for (JsonObject jGame : jGames.getValuesAs(JsonObject.class)) {
-//                String gameName = jGame.getString("name");
-//                SteamGame game = new SteamGame(gameName);
-//                game.setMinutesPlayed(jGame.getInt("playtime_forever"));
-//                game.setID(String.valueOf(jGame.getInt("appid")));
-//                game.setIcon(jGame.getString("img_icon_url"));
-//                game.setBanner(jGame.getString("img_logo_url"));
-//                if (!game.isEmpty()) gameMap.put(gameName, game);
-//            }
-//        } finally {
-//            if (is != null) is.close();
-//        }
-//        setGameMap(gameMap);
-//    }
     
     /**
      * Getter for users steam ID
@@ -223,29 +87,11 @@ public class SteamUser implements Comparable<SteamUser>{
                 "Looking To Trade", "Looking To Play"};
         return status[onlineStatus];
     }
-
-    /**
-     * Setter for users imageResourceID
-     * @param imageResourceID
-     */
-    public void setImageResourceID(int imageResourceID) {
-        this.imageResourceID = imageResourceID;
-    }
-
-
-    /**
-     * Getter for users imageResourceId.
-     * @return int representing resourceID
-     */
-    public int getImageResourceId() {
-        return imageResourceID;
-    }
-
+    
     /**
      * Setter for the usersProfilePicture
      * @param addresses - array of strings containing URLs where the {small, medium, large} version of the
      *                  profile picture is stored online.
-     * @throws MalformedURLException
      */
     public void setProfilePicture(String[] addresses) throws MalformedURLException {
         if (addresses == null) throw new java.lang.NullPointerException();
@@ -261,6 +107,22 @@ public class SteamUser implements Comparable<SteamUser>{
      */
     public URL[] getProfilePicture() {
         return profilePicture;
+    }
+    
+    /**
+     * Setter for users imageResourceID
+     * @param imageResourceID
+     */
+    public void setImageResourceID(int imageResourceID) {
+        this.imageResourceID = imageResourceID;
+    }
+
+    /**
+     * Getter for users imageResourceId.
+     * @return int representing resourceID
+     */
+    public int getImageResourceId() {
+        return imageResourceID;
     }
     
     /**
