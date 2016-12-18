@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * Created by David-local on 12/14/2016.
  */
 
-public class FriendsListAdaptor extends ArrayAdapter<SteamFriend> {
+public class FriendsListAdapter extends ArrayAdapter<SteamFriend> {
 
-    public FriendsListAdaptor(Activity context, ArrayList<SteamFriend> friends) {
+    public FriendsListAdapter(Activity context, ArrayList<SteamFriend> friends) {
         super(context, 0, friends);
     }
 
@@ -33,6 +33,8 @@ public class FriendsListAdaptor extends ArrayAdapter<SteamFriend> {
         SteamFriend currentFriend = getItem(position);
 
         // Populate the imageView
+        // Need to check if image image URL has changed. If it has redownload. Otherwise use downloaded
+        // one
         ImageView friendImage = (ImageView) listItemView.findViewById(R.id.friend_icon);
         friendImage.setImageResource(currentFriend.getImageResourceId());
 

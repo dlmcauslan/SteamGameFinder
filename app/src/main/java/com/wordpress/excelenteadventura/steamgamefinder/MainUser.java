@@ -30,6 +30,7 @@ public class MainUser extends SteamUser{
      * @return a HashMap containing SteamFriend objects that are the users friends where the key is the friends username
      */
     public Map<String, SteamFriend> getFriendsMap() {
+        if (friendsMap == null) return null;
         return new HashMap<String, SteamFriend>(friendsMap);
     }
     

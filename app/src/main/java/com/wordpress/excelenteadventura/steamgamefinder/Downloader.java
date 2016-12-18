@@ -46,6 +46,15 @@ public final class Downloader {
         // Make Http request and set user data from the returned JSON object
         try {
             JSONObject dataObject = makeHttpRequest(playerSummaryData);
+
+            // If dataObject is null, log it, show a toast, and return null.
+            if (dataObject == null) {
+                String errorMessage = "Error setting user data.\nIs the steamID correct?";
+                Log.e(LOG_TAG, errorMessage);
+//                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // Get JsonObject containing user data
             JSONObject userObject = dataObject.getJSONObject("response").getJSONArray("players").getJSONObject(0);
             
@@ -61,7 +70,6 @@ public final class Downloader {
             // Add a toast to let user know.
             String errorMessage = "Error setting user data.\nIs the steamID correct?";
             Log.e(LOG_TAG, errorMessage, e);
-//            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -81,6 +89,13 @@ public final class Downloader {
         // Make Http request and set friend data from the returned JSON object
         try {
             JSONObject dataObject = makeHttpRequest(friendsData);
+
+            // If dataObject is null, log it, show a toast, and return null.
+            if (dataObject == null) {
+                Log.v(LOG_TAG, "JSON object returned was null");
+                return;
+            }
+
             // Get JsonArray containing friend data
             JSONArray friends = dataObject.getJSONObject("friendslist").getJSONArray("friends");
             // Loop over the array, creating friend objects and setting their data
@@ -126,6 +141,13 @@ public final class Downloader {
         // Make Http request and set game data from the returned JSON object
         try {
             JSONObject dataObject = makeHttpRequest(gameData);
+
+            // If dataObject is null, log it, show a toast, and return null.
+            if (dataObject == null) {
+                Log.v(LOG_TAG, "JSON object returned was null");
+                return;
+            }
+
             // Get JsonArray containing users game data
             JSONArray jGames = dataObject.getJSONObject("response").getJSONArray("games");
             // Loop over the array creating a SteamGame object for each game and setting the object data
@@ -195,7 +217,6 @@ public final class Downloader {
                 String jsonResponse = readFromStream(inputStream);
                 jsonObject = new JSONObject(jsonResponse);
             } else {
-
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException | JSONException e) {

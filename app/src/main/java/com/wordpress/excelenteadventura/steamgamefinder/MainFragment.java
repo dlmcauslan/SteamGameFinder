@@ -1,6 +1,7 @@
 package com.wordpress.excelenteadventura.steamgamefinder;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class MainFragment extends Fragment {
     private MainUser mMainUser;
     private View mFragmentView;
+    private Context mContext;
 
     public MainFragment() {
         // Required empty public constructor
@@ -29,7 +32,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       mFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
+        mFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
+        mContext = mFragmentView.getContext();
 
         // Setup Floating Action Button to open next activity (not created yet)
         FloatingActionButton fab = (FloatingActionButton) mFragmentView.findViewById(R.id.floatingActionButton);
@@ -52,9 +56,17 @@ public class MainFragment extends Fragment {
         MainUserProfileAsyncTask task = new MainUserProfileAsyncTask();
         task.execute(mMainUser);
 
+        // TODO: Check if mainUsers image has previously been downloaded, if it has - set it
+        // if it hasn't, or the image has changed - start a new Async task to download it, then set it.
+
         // Create new async task and download Friends data
+        // TODO: This is slow so add a progress bar.
         FriendsListAsyncTask friendTask = new FriendsListAsyncTask();
         friendTask.execute(mMainUser);
+
+        // TODO: Check if friends images have previously been downloaded, if they has - set them
+        // if they haven't, or the image has changed - start a new Async task to download it, then set it.
+        // Need to check the workflow here, figure out how to make this work with the FriendsListAdapter.
 
 //        // Create some fake steam friends to add populate array list
 //        SteamFriend s = new SteamFriend("123");
@@ -94,7 +106,7 @@ public class MainFragment extends Fragment {
         ArrayList<SteamFriend> friends = mMainUser.getFriendsList();
 
         // Create a new friendslist adapter whose source is a list of SteamFriends.
-        FriendsListAdaptor friendsAdapter = new FriendsListAdaptor(getActivity(), friends);
+        FriendsListAdapter friendsAdapter = new FriendsListAdapter(getActivity(), friends);
 
         // Get a reference to the listview and attach the adapter to it.
         ListView listView = (ListView) mFragmentView.findViewById(R.id.friends_list_view);
@@ -111,7 +123,11 @@ public class MainFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            setMainUserText();
+            if (mMainUser.getUserName() != null) {
+                setMainUserText();
+            } else {
+                Toast.makeText(mContext, "Error Setting User Data.\nCheck Internet Connection.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -125,7 +141,11 @@ public class MainFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            setFriendsText();
+            if (mMainUser.getFriendsMap() != null) {
+                setFriendsText();
+            } else {
+                Toast.makeText(mContext, "Error Setting User Data.\nCheck Internet Connection.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
