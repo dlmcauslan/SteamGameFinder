@@ -1,7 +1,6 @@
 package com.wordpress.excelenteadventura.steamgamefinder;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,7 @@ public class SteamUser implements Comparable<SteamUser>{
     private String userName;
     private int onlineStatus;
     private int imageResourceID;
-    private URL[] profilePicture;
+    private String[] profilePicture;
     private Map<String, SteamGame> gameMap;
     
     public static final Comparator<SteamUser> BY_ONLINESTATUS = new ByOnlineStatus();
@@ -95,35 +94,21 @@ public class SteamUser implements Comparable<SteamUser>{
      */
     public void setProfilePicture(String[] addresses) throws MalformedURLException {
         if (addresses == null) throw new java.lang.NullPointerException();
-        profilePicture = new URL[addresses.length];
-        for (int i = 0; i < addresses.length; i++) {
-            profilePicture[i] = new URL(addresses[i]);
-        }
+//        profilePicture = new String[addresses.length];
+//        for (int i = 0; i < addresses.length; i++) {
+//            profilePicture[i] = addresses[i];
+//        }
+        profilePicture = addresses.clone();
     }
     
     /**
      * Getter for the usersProfilePicture
      * @return URL array where links to the small, medium and large profile picture is stored
      */
-    public URL[] getProfilePicture() {
+    public String[] getProfilePicture() {
         return profilePicture;
     }
-    
-    /**
-     * Setter for users imageResourceID
-     * @param imageResourceID
-     */
-    public void setImageResourceID(int imageResourceID) {
-        this.imageResourceID = imageResourceID;
-    }
 
-    /**
-     * Getter for users imageResourceId.
-     * @return int representing resourceID
-     */
-    public int getImageResourceId() {
-        return imageResourceID;
-    }
     
     /**
      * Setter for gameMap, contains users list of games, referenced by their

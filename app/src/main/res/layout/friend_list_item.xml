@@ -10,7 +10,7 @@
         android:layout_height="64dp"
         android:scaleType="fitCenter"
         android:id="@+id/friend_icon"
-        android:src="@mipmap/ic_launcher" />
+        android:padding="8dp" />
 
     <LinearLayout
         android:layout_width="0dp"

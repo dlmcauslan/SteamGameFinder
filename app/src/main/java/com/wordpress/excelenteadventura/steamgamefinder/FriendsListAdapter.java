@@ -12,19 +12,32 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by David-local on 12/14/2016.
+ * Created by DLMcAuslan on 12/14/2016.
+ * ArrayAdapter that sets friend data to the respective friend_list_item
  */
 
 public class FriendsListAdapter extends ArrayAdapter<SteamFriend> {
 
+    /**
+     * Class constructor, inherits from super class
+     * @param context
+     * @param friends - ArrayList of steam friend objects to populate the ListView
+     */
     public FriendsListAdapter(Activity context, ArrayList<SteamFriend> friends) {
         super(context, 0, friends);
     }
 
+    /**
+     * getView method which gets each list-item for the list view and populates it with the friend
+     * data
+     * @param position - which position of the list view it is
+     * @param listItemView - the listItemView to populate
+     * @param parent
+     * @return Returns the list item view that is populated.
+     */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View listItemView, ViewGroup parent) {
         // Check if the existing view is being reused, otherwise inflate the view
-        View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.friend_list_item, parent, false);
         }
@@ -33,17 +46,15 @@ public class FriendsListAdapter extends ArrayAdapter<SteamFriend> {
         SteamFriend currentFriend = getItem(position);
 
         // Populate the imageView
-        // Need to check if image image URL has changed. If it has redownload. Otherwise use downloaded
-        // one
-        ImageView friendImage = (ImageView) listItemView.findViewById(R.id.friend_icon);
-        friendImage.setImageResource(currentFriend.getImageResourceId());
-
+        ImageView imageView = (ImageView) listItemView.findViewById(R.id.friend_icon);
+        Utilities.loadImageToView(currentFriend, getContext(), imageView);
 
         // Populate the two text views - users name and online status
         TextView friendName = (TextView) listItemView.findViewById(R.id.text_friend_name);
         friendName.setText(currentFriend.getUserName());
         TextView onlineStatus = (TextView) listItemView.findViewById(R.id.text_online_status);
         onlineStatus.setText(currentFriend.getOnlineString());
+
         // Set colour depending on online status
         if (currentFriend.getOnlineStatus() == 0) {
             friendName.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
