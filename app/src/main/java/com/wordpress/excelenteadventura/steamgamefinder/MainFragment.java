@@ -9,14 +9,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -31,8 +35,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private Context mContext;
     private FriendsListAdapter mFriendsAdapter;
     private TextView mEmptyStateTextView;
+    private Map<String, SteamFriend> mFriendCompare = new HashMap<>();
 
-
+    private static final String LOG_TAG = MainFragment.class.getSimpleName();
     private static final int MAIN_USER_LOADER = 1;
     private static final int FRIEND_LOADER = 2;
 
@@ -136,6 +141,27 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         // Get a reference to the listview and attach the adapter to it.
         ListView listView = (ListView) mFragmentView.findViewById(R.id.friends_list_view);
         listView.setAdapter(mFriendsAdapter);
+
+        // Set onClickListener for listview. Not sure if I want it here or in the onCreateView method
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Get the friend object related to the clicked item
+                SteamFriend friend = mFriendsAdapter.getItem(position);
+                // If the friend is not in the friendCompare map add them, otherwise remove them.
+                // Background colour is changed in touch_selector.xml and styles.xml files
+                if (mFriendCompare.containsKey(friend.getID())) {
+                    mFriendCompare.remove(friend.getID());
+                } else {
+                    mFriendCompare.put(friend.getID(), friend);
+                }
+                // Log statements to check map
+                Log.d(LOG_TAG, "FriendsCompare Map.");
+                for (SteamFriend fr : mFriendCompare.values()) {
+                    Log.d(LOG_TAG, fr.getUserName());
+                }
+            }
+        });
     }
 
     /**
