@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamFriend;
+import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Utilities;
+
 import java.util.ArrayList;
 
 /**

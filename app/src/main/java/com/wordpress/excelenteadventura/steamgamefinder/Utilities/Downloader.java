@@ -1,9 +1,15 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Utilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+
+import com.wordpress.excelenteadventura.steamgamefinder.BuildConfig;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.MainUser;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamFriend;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamGame;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;

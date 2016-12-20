@@ -1,10 +1,12 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Utilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamUser;
 
 import java.io.File;
 import java.io.FileInputStream;

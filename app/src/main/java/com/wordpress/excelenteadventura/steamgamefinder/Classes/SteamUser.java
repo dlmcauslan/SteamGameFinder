@@ -1,5 +1,6 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Classes;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author DLMcAuslan
  *
  */
-public class SteamUser implements Comparable<SteamUser>{
+public class SteamUser implements Comparable<SteamUser>, Serializable {
     private final String steamID;
     private String userName;
     private int onlineStatus;

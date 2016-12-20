@@ -1,4 +1,4 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Classes;
 
 /**
  * A class that extends SteamUser which is used to store data about the users

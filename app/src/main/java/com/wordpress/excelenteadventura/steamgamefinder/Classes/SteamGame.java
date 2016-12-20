@@ -1,4 +1,4 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Classes;
 
 import java.net.MalformedURLException;
 import java.net.URL;

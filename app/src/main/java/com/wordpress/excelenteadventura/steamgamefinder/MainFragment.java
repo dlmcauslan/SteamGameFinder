@@ -4,6 +4,7 @@ package com.wordpress.excelenteadventura.steamgamefinder;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,6 +18,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.MainUser;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamFriend;
+import com.wordpress.excelenteadventura.steamgamefinder.Loaders.FriendLoader;
+import com.wordpress.excelenteadventura.steamgamefinder.Loaders.MainUserLoader;
+import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,10 +74,12 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Uncomment this and replace newClass.class with the name of the activity we're linking to
-                // Not sure whether MainFragment.this is correct either.
-//                Intent intent = new Intent(MainFragment.this, newClass.class);
-//                startActivity(intent);
+                // Launches GamesInCommonActivity.
+                Intent intent = new Intent(getActivity(), GamesInCommonActivity.class);
+                // Set data on the intent to be passed through
+                intent.putExtra("MainUser", mMainUser);
+                // Start intent
+                startActivity(intent);
             }
         });
 
@@ -155,6 +164,9 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 } else {
                     mFriendCompare.put(friend.getID(), friend);
                 }
+                // TODO: maybe it is a good idea to download the users game list here, so its done in the background.
+                // Although will have to see how this works, because the comparisson should be done in the next activity
+                // so a loading indicator can be displayed.
                 // Log statements to check map
                 Log.d(LOG_TAG, "FriendsCompare Map.");
                 for (SteamFriend fr : mFriendCompare.values()) {

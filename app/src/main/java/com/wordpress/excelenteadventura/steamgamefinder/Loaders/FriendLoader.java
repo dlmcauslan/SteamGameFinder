@@ -1,7 +1,11 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Loaders;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.MainUser;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamFriend;
+import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Downloader;
 
 /**
  * Created by DLMcAuslan on 12/18/2016.

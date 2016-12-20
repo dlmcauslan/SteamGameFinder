@@ -1,5 +1,8 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Classes;
 
+import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Downloader;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +14,7 @@ import java.util.Map;
  * Main user has extra data associated with it, such as a list of their friends.
  * @author DLMcAuslan
  */
-public class MainUser extends SteamUser{
+public class MainUser extends SteamUser implements Serializable{
     private HashMap<String, SteamFriend> friendsMap;
     
     
