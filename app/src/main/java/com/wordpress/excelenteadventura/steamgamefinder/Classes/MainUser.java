@@ -58,12 +58,12 @@ public class MainUser extends SteamUser implements Serializable{
     }
     
     /**
-     * Searches friendsMap for a particular friend with name friendName 
-     * @param friendName - name of friend to search for
+     * Searches friendsMap for a particular friend with ID friendID
+     * @param friendID - name of friend to search for
      * @return SteamFriend if found, otherwise returns null
      */
-    private SteamFriend getFriend(String friendName) {
-        return getFriendsMap().get(friendName);
+    public SteamFriend getFriend(String friendID) {
+        return getFriendsMap().get(friendID);
     }
           
     /**

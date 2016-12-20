@@ -85,7 +85,7 @@ public final class Downloader {
      * @param user - a MainUser object to add the data too. Note this method is only callable on the mainUser.
      */
     public static void setFriendsData(MainUser user) {
-        // Map containing the users friends. Key - friend name, value - steamFriend object.
+        // Map containing the users friends. Key - friend ID, value - steamFriend object.
         Map<String, SteamFriend> friendMap = new HashMap<String, SteamFriend>();
         
         // Gets the URL containing the users player summary data.
@@ -114,7 +114,7 @@ public final class Downloader {
                 Downloader.setUserData(friend); // Now friend data should automatically download on first attempt at getting from file,
                                                 // Note that this means online status won't be current.
                 // Add friend to friendMap
-                friendMap.put(friend.getUserName(), friend);
+                friendMap.put(steamID, friend);
                 /////////////////
                 // Do I add friends games now or later!
                 ///////////////  

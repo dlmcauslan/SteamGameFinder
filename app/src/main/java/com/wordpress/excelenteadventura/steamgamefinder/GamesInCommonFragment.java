@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.MainUser;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamFriend;
+
+import java.util.ArrayList;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -32,6 +35,16 @@ public class GamesInCommonFragment extends Fragment {
             // Get the main User
             MainUser mMainUser = (MainUser) intent.getSerializableExtra("MainUser");
             Log.v(LOG_TAG, mMainUser.getUserName());
+            Log.v(LOG_TAG, "Friends to compare with:");
+            // Get the friends to compare with
+            if (intent.hasExtra("FriendsToFind")) {
+                ArrayList<String> friendsToCompare = intent.getStringArrayListExtra("FriendsToFind");
+                for (String fID: friendsToCompare) {
+                    SteamFriend fr = mMainUser.getFriend(fID);
+                    Log.v(LOG_TAG, fr.getUserName() + " : " + fr.getOnlineString());
+                }
+            }
+
         }
         return rootView;
     }
