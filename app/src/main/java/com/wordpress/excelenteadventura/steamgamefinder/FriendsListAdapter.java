@@ -50,7 +50,7 @@ public class FriendsListAdapter extends ArrayAdapter<SteamFriend> {
 
         // Populate the imageView
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.friend_icon);
-        Utilities.loadImageToView(currentFriend, getContext(), imageView);
+        Utilities.loadImageToView(Utilities.urlToFilename(currentFriend.getProfilePicture()), getContext(), imageView);
 
         // Populate the two text views - users name and online status
         TextView friendName = (TextView) listItemView.findViewById(R.id.text_friend_name);

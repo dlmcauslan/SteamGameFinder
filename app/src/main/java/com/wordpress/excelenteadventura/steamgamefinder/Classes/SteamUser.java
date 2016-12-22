@@ -17,8 +17,7 @@ public class SteamUser implements Comparable<SteamUser>, Serializable {
     private final String steamID;
     private String userName;
     private int onlineStatus;
-    private int imageResourceID;
-    private String[] profilePicture;
+    private String profilePicture;
     private Map<String, SteamGame> gameMap;
     
     public static final Comparator<SteamUser> BY_ONLINESTATUS = new ByOnlineStatus();
@@ -99,14 +98,14 @@ public class SteamUser implements Comparable<SteamUser>, Serializable {
 //        for (int i = 0; i < addresses.length; i++) {
 //            profilePicture[i] = addresses[i];
 //        }
-        profilePicture = addresses.clone();
+        profilePicture = addresses[2];
     }
     
     /**
      * Getter for the usersProfilePicture
      * @return URL array where links to the small, medium and large profile picture is stored
      */
-    public String[] getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 

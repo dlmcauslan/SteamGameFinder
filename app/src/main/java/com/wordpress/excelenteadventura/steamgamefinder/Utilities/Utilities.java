@@ -78,10 +78,10 @@ public final class Utilities {
      * @param context
      * @param imageView - the image view to set the image to.
      */
-    public static void loadImageToView(SteamUser user, Context context, ImageView imageView) {
-        // Get filename from URL
-        String imageUrl = user.getProfilePicture()[2];
-        String imageName = urlToFilename(imageUrl);
+    public static void loadImageToView(String imageName, Context context, ImageView imageView) {
+//        // Get filename from URL
+//        String imageUrl = user.getProfilePicture()[2];
+//        String imageName = urlToFilename(imageUrl);
         // If the file exits, load it and set it to the imageView
         File file = context.getFileStreamPath(imageName);
         if (file.exists()) {

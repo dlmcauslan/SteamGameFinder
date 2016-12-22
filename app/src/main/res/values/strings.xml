@@ -4,7 +4,11 @@
     <string name="no_internet_connection">No internet connection detected.</string>
     <string name="no_games_in_common">You have no games in common :(</string>
     <string name="title_activity_games_in_common">Games In Common</string>
-    <string name="action_settings">Settings</string>
+
+    <!--Shared Prefs Strings-->
+    <string name="pref_main_username">User Name</string>
+    <string name="pref_main_userID">User ID</string>
+    <string name="pref_main_image_filename">Image Filename</string>
 
 
 </resources>

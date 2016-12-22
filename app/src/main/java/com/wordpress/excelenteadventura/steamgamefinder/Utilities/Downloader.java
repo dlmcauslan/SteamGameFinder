@@ -207,7 +207,7 @@ public final class Downloader {
      */
     public static void downloadAndSaveUserImage(SteamUser user, Context context) {
         // Get filename from URL
-        String imageUrl = user.getProfilePicture()[2];
+        String imageUrl = user.getProfilePicture();
         String imageName = Utilities.urlToFilename(imageUrl);
 
         // Check if file has already been downloaded, if it hasn't download it.
