@@ -89,7 +89,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                     startActivity(intent);
                 } else {
                     // Otherwise set a toast to alert the user
-                    Toast toast = Toast.makeText(mContext, "You must choose at least one friend to compare to!", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(mContext, "You must choose at least one friend to compare games with!", Toast.LENGTH_SHORT);
                     LinearLayout layout = (LinearLayout) toast.getView();
                     if (layout.getChildCount() > 0) {
                         TextView tv = (TextView) layout.getChildAt(0);

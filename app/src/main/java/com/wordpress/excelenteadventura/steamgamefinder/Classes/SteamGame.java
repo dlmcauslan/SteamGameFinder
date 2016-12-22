@@ -1,7 +1,6 @@
 package com.wordpress.excelenteadventura.steamgamefinder.Classes;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Comparator;
 
 /**
@@ -14,8 +13,8 @@ public class SteamGame implements Comparable<SteamGame>{
     private final String gameName;
     private int minutesPlayed;
     private String gameID;
-    private URL gameIcon;
-    private URL gameBanner;
+    private String gameIcon;
+    private String gameBanner;
     public static final Comparator<SteamGame> BY_TIMEPLAYED = new ByTimePlayed();
     private static final String BASE_IMAGE_URL = "http://media.steampowered.com/steamcommunity/public/images/apps/";
     
@@ -98,18 +97,17 @@ public class SteamGame implements Comparable<SteamGame>{
     /**
      * Setter for the games Icon
      * @param address - string containing URL where the game icon is stored online.
-     * @throws MalformedURLException
      */
-    public void setIcon(String address) throws MalformedURLException {
+    public void setIcon(String address) {
         if (address == null) throw new java.lang.NullPointerException();
-        gameIcon = new URL(BASE_IMAGE_URL + getID() + "/" + address + ".jpg");
+        gameIcon = BASE_IMAGE_URL + getID() + "/" + address + ".jpg";
     }
     
     /**
      * Getter for the gameIcon
-     * @return URL link to the game Icon picture online
+     * @return String link to the game Icon picture online
      */
-    public URL getIcon() {
+    public String getIcon() {
         return gameIcon;
     }
     
@@ -120,14 +118,14 @@ public class SteamGame implements Comparable<SteamGame>{
      */
     public void setBanner(String address) throws MalformedURLException {
         if (address == null) throw new java.lang.NullPointerException();
-        gameBanner = new URL(BASE_IMAGE_URL + getID() + "/" + address + ".jpg");
+        gameBanner = BASE_IMAGE_URL + getID() + "/" + address + ".jpg";
     }
     
     /**
      * Getter for the gameBanner
-     * @return URL link to the game Banner picture online
+     * @return String link to the game Banner picture online
      */
-    public URL getBanner() {
+    public String getBanner() {
         return gameBanner;
     }
 

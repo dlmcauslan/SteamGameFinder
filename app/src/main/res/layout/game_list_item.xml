@@ -8,10 +8,10 @@
     android:minHeight="?android:attr/listPreferredItemHeight">
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="fitCenter"
-        android:id="@+id/friend_icon"
+        android:id="@+id/game_banner"
         android:padding="8dp" />
 
     <LinearLayout
@@ -27,15 +27,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_friend_name"
-            android:text="El Mavericko"
+            android:id="@+id/text_game_name"
             android:textColor="@color/white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_online_status"
-            android:text="Online"
+            android:id="@+id/text_game_time_played"
             android:textColor="@color/white"/>
 
     </LinearLayout>

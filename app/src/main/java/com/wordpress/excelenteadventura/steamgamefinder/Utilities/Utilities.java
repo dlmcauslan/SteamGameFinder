@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamGame;
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamUser;
 
 import java.io.File;
@@ -85,6 +86,24 @@ public final class Utilities {
         File file = context.getFileStreamPath(imageName);
         if (file.exists()) {
 //            Log.v("Image name", imageName);
+            imageView.setImageBitmap(loadImage(context, imageName));
+        }
+    }
+
+    /**
+     * Loads the users image and sets it to the inputted image View
+     * @param game - the Steam Game who's image is to be loaded
+     * @param context
+     * @param imageView - the image view to set the image to.
+     */
+    public static void loadBannerImageToView(SteamGame game, Context context, ImageView imageView) {
+        // Get filename from URL
+        String imageUrl = game.getBanner();
+        String imageName = urlToFilename(imageUrl);
+        // If the file exits, load it and set it to the imageView
+        File file = context.getFileStreamPath(imageName);
+        if (file.exists()) {
+            Log.v("Image name", imageName);
             imageView.setImageBitmap(loadImage(context, imageName));
         }
     }

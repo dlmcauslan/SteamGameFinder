@@ -72,7 +72,7 @@ public class MainUser extends SteamUser implements Serializable{
      * @param friends - an ArrayList of users that we are comparing to
      * @return list of the games the users have in common
      */
-    public List<SteamGame> getGamesInCommon(ArrayList<String> friends) {
+    public List<SteamGame> getGamesInCommon(List<String> friends) {
         if (friends == null) throw new java.lang.NullPointerException("Null friends list.");
         // Get Map of users games
         Map<String, SteamGame> gamesInCommon = getGameMap();
@@ -92,7 +92,13 @@ public class MainUser extends SteamUser implements Serializable{
             for (String gameName: gamesInCommon.keySet()) {
                 // If the friend has the game, add it to gamesInCommonUpdated
                 if (friendGames.containsKey(gameName)) {
-                    gamesInCommonUpdated.put(gameName, gamesInCommon.get(gameName));
+                    SteamGame game = gamesInCommon.get(gameName);
+                    // Update total time played.
+                    game.setMinutesPlayed(game.getMinutesPlayed() + friendGames.get(gameName).getMinutesPlayed());
+                    // Add game to new gamesInCommon Map
+                    gamesInCommonUpdated.put(gameName, game);
+
+
                 }
             }
             // replace gamesInCommon with gamesInCommonUpdated

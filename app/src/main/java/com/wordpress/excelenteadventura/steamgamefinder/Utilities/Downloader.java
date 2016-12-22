@@ -152,8 +152,10 @@ public final class Downloader {
                 Log.v(LOG_TAG, "JSON object returned was null");
                 return;
             }
+            Log.d(LOG_TAG, urlString);
 
             // Get JsonArray containing users game data
+            // TODO: handle app crash if user's data is private.
             JSONArray jGames = dataObject.getJSONObject("response").getJSONArray("games");
             // Loop over the array creating a SteamGame object for each game and setting the object data
             for (int i = 0; i < jGames.length(); i++) {
@@ -217,6 +219,28 @@ public final class Downloader {
             Log.v(LOG_TAG, "Downloading Image");
         }
     }
+
+    /**
+     * Checks if the games banner picture has previously been downloaded. If it needs to be redownloaded
+     * it does this and saves it to file.
+     * @param game SteamUser whose picture needs to be downloaded.
+     * @param context
+     */
+    public static void downloadAndSaveGameImage(SteamGame game, Context context) {
+        // Get filename from URL
+        String imageUrl = game.getBanner();
+        String imageName = Utilities.urlToFilename(imageUrl);
+
+        // Check if file has already been downloaded, if it hasn't download it.
+        File file = context.getFileStreamPath(imageName);
+        if (!file.exists()) {
+            Bitmap img = Downloader.downloadImage(imageUrl);
+            Utilities.saveImage(context, img, imageName);
+            Log.v(LOG_TAG, imageUrl);
+            Log.v(LOG_TAG, "Downloading Image: " + imageName);
+        }
+    }
+
 
     /**
      * Returns new URL object from the given string URL.
