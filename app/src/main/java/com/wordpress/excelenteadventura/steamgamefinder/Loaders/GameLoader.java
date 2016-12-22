@@ -40,9 +40,10 @@ public class GameLoader extends AsyncTaskLoader<List<SteamGame>> {
     }
 
     /**
-     * loadInBackground method, which downloads the friend data and sets it to the mainUser object.
-     * Also loops over the mainUser's friends and downloads their profile pictures if required.
-     * @return Always returns null.
+     * loadInBackground method, which downloads the game data for the main user, then calls the
+     * getGamesInCommon method to get a list of SteamGame objects that the users have in common.
+     * Then loops over the steam games and downloads their banner image if it is required.
+     * @return List of SteamGame objects representing the games that the users have in common.
      */
     @Override
     public List<SteamGame> loadInBackground() {

@@ -9,27 +9,15 @@
     tools:context="com.wordpress.excelenteadventura.steamgamefinder.GamesInCommonFragment"
     tools:showIn="@layout/activity_games_in_common">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-        <ImageView
-            android:layout_width="116dp"
-            android:layout_height="116dp"
-            android:scaleType="fitCenter"
-            android:padding="16dp"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:id="@+id/text_game_users"
-            android:textSize="28sp"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+    <!--<TextView-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:id="@+id/text_game_users"-->
+        <!--android:textSize="28sp"-->
+        <!--android:textColor="@color/white"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,20 +30,20 @@
             android:id="@+id/games_list_view"
             android:padding="8dp"/>
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/games_empty_view"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="16sp"-->
-            <!--android:layout_centerInParent="true"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/games_empty_view"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"/>
 
-        <!--<ProgressBar-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/games_loading_indicator"-->
-            <!--style="@style/Widget.AppCompat.ProgressBar"-->
-            <!--android:layout_centerInParent="true"/>-->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/games_loading_indicator"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 

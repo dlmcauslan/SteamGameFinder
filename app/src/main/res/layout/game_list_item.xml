@@ -8,11 +8,12 @@
     android:minHeight="?android:attr/listPreferredItemHeight">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="64dp"
         android:scaleType="fitCenter"
         android:id="@+id/game_banner"
-        android:padding="8dp" />
+        android:padding="4dp"
+        android:layout_gravity="center_vertical"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -20,9 +21,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:padding="4dp">
-        <!--android:background = "@color/colorPrimaryDark"-->
-
+        android:paddingLeft="8dp">
 
         <TextView
             android:layout_width="match_parent"

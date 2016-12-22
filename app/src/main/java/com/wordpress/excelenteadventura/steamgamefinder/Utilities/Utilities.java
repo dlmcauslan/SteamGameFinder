@@ -103,7 +103,7 @@ public final class Utilities {
         // If the file exits, load it and set it to the imageView
         File file = context.getFileStreamPath(imageName);
         if (file.exists()) {
-            Log.v("Image name", imageName);
+//            Log.v("Image name", imageName);
             imageView.setImageBitmap(loadImage(context, imageName));
         }
     }

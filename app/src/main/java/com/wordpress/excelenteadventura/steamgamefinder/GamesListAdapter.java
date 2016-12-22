@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamGame;
+import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Utilities;
 
 import java.util.List;
 
@@ -46,14 +48,14 @@ public class GamesListAdapter extends ArrayAdapter<SteamGame> {
         SteamGame currentGame = getItem(position);
 
         // Populate the imageView
-//        ImageView imageView = (ImageView) listItemView.findViewById(R.id.friend_icon);
-//        Utilities.loadBannerImageToView(currentGame, getContext(), imageView);
+        ImageView imageView = (ImageView) listItemView.findViewById(R.id.game_banner);
+        Utilities.loadBannerImageToView(currentGame, getContext(), imageView);
 
         // Populate the two text views - users name and online status
         TextView friendName = (TextView) listItemView.findViewById(R.id.text_game_name);
         friendName.setText(currentGame.getName());
         TextView onlineStatus = (TextView) listItemView.findViewById(R.id.text_game_time_played);
-        onlineStatus.setText("Combined play time: " + currentGame.getTimePlayed());
+        onlineStatus.setText(currentGame.getTimePlayed());
 
         // Return the whole list item layout so that it can be shown in the listview.
         return listItemView;

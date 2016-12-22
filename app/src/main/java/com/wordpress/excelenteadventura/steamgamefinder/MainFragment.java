@@ -44,7 +44,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     private View mFragmentView;
     private Context mContext;
     private FriendsListAdapter mFriendsAdapter;
-    private TextView mEmptyStateTextView;
     private Map<String, SteamFriend> mFriendCompare = new HashMap<>();
 
     private static final String LOG_TAG = MainFragment.class.getSimpleName();
@@ -107,7 +106,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
         // Find a reference to the FriendsList view in the layout and set empty state
         ListView friendsListView = (ListView) mFragmentView.findViewById(R.id.friends_list_view);
-        mEmptyStateTextView = (TextView) mFragmentView.findViewById(R.id.empty_view);
+        TextView mEmptyStateTextView = (TextView) mFragmentView.findViewById(R.id.empty_view);
         friendsListView.setEmptyView(mEmptyStateTextView);
 
         // Get a reference to the connectivity manager to check network state
@@ -181,9 +180,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 } else {
                     mFriendCompare.put(friend.getID(), friend);
                 }
-                // TODO: maybe it is a good idea to download the users game list here, so its done in the background.
-                // Although will have to see how this works, because the comparisson should be done in the next activity
-                // so a loading indicator can be displayed.
                 // Log statements to check map
                 Log.d(LOG_TAG, "FriendsCompare Map.");
                 for (SteamFriend fr : mFriendCompare.values()) {

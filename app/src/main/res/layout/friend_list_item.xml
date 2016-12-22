@@ -21,21 +21,17 @@
         android:orientation="vertical"
         android:gravity="center_vertical"
         android:padding="4dp">
-        <!--android:background = "@color/colorPrimaryDark"-->
-
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_friend_name"
-            android:text="El Mavericko"
             android:textColor="@color/white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_online_status"
-            android:text="Online"
             android:textColor="@color/white"/>
 
     </LinearLayout>
