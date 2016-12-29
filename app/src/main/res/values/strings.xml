@@ -2,6 +2,7 @@
     <string name="app_name">Steam Game Finder</string>
 
     <string name="no_internet_connection">No internet connection detected.</string>
+    <string name="incorrect_userID">Cannot get user data.\nEither user ID is invalid, or user\'s profile is private.</string>
     <string name="no_games_in_common">You have no games in common :(</string>
     <string name="title_activity_games_in_common">Games In Common</string>
 
@@ -10,5 +11,9 @@
     <string name="pref_main_userID">User ID</string>
     <string name="pref_main_image_filename">Image Filename</string>
 
+    <!--Settings Menu Strings-->
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_user_ID">Steam User ID</string>
+    <string name="setting_default_user_ID">76561198020975978</string>
 
 </resources>

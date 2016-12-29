@@ -45,12 +45,12 @@ public final class Downloader {
      * Sets the player summary data from the web.
      * @param user - a SteamUser object to add the data too.
      */
-    public static void setUserData(SteamUser user) {
+    public static Boolean setUserData(SteamUser user) {
         // Gets the URL containing the users player summary data.
         String urlString = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" 
                 + APIKey + "&steamids=" + user.getID() + "&format=json";
 
-        Log.v(LOG_TAG, urlString);
+//        Log.v(LOG_TAG, urlString);
         URL playerSummaryData = createUrl(urlString);
         
         // Make Http request and set user data from the returned JSON object
@@ -61,7 +61,7 @@ public final class Downloader {
             if (dataObject == null) {
                 String errorMessage = "Error setting user data.\nIs the steamID correct?";
                 Log.e(LOG_TAG, errorMessage);
-                return;
+                return false;
             }
 
             // Get JsonObject containing user data
@@ -75,16 +75,19 @@ public final class Downloader {
                                                       userObject.getString("avatarfull") };
             user.setProfilePicture(profilePictures);      
         } catch (IOException | JSONException e) {
-            String errorMessage = "Error setting user data.\nIs the steamID correct?";
+            String errorMessage = "IO/JSONexception Error setting user data.\nIs the steamID correct?";
             Log.e(LOG_TAG, errorMessage, e);
+            return false;
         }
+        return true;
     }
+
     
     /**
      * Sets the users friendsList data from web or from file.
      * @param user - a MainUser object to add the data too. Note this method is only callable on the mainUser.
      */
-    public static void setFriendsData(MainUser user) {
+    public static Boolean setFriendsData(MainUser user) {
         // Map containing the users friends. Key - friend ID, value - steamFriend object.
         Map<String, SteamFriend> friendMap = new HashMap<String, SteamFriend>();
         
@@ -100,7 +103,7 @@ public final class Downloader {
             // If dataObject is null, log it, show a toast, and return null.
             if (dataObject == null) {
                 Log.v(LOG_TAG, "JSON object returned was null");
-                return;
+                return false;
             }
 
             // Get JsonArray containing friend data
@@ -115,20 +118,18 @@ public final class Downloader {
                                                 // Note that this means online status won't be current.
                 // Add friend to friendMap
                 friendMap.put(steamID, friend);
-                /////////////////
-                // Do I add friends games now or later!
-                ///////////////  
              } 
         }
         catch (IOException | JSONException e) {
             // If IOException, returns without setting user data
             String errorMessage = "Error setting friend data.";
             Log.e(LOG_TAG, errorMessage, e);
-            return;
+            return false;
         }
         
         // Set the users friendMap data
         user.setFriendMap(friendMap);
+        return true;
     }
     
     /**

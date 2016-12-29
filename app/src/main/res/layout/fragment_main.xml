@@ -52,7 +52,9 @@
                 android:id="@+id/empty_view"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:layout_margin="8dp"/>
 
             <ProgressBar
                 android:layout_width="wrap_content"

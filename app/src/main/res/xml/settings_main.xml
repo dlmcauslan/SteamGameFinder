@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_menu_item"
+    >
+
+    <EditTextPreference
+        android:defaultValue = "@string/setting_default_user_ID"
+        android:key="@string/pref_main_userID"
+        android:selectAllOnFocus="true"
+        android:inputType="number"
+        android:numeric="integer"
+        android:title="@string/settings_user_ID"/>
+
+</PreferenceScreen>

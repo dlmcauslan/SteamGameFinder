@@ -13,7 +13,7 @@ import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Downloader;
  * pictures to disk.
  */
 
-public class FriendLoader extends AsyncTaskLoader<Void> {
+public class FriendLoader extends AsyncTaskLoader<Boolean> {
 
     private MainUser mMainUser;
 
@@ -41,15 +41,15 @@ public class FriendLoader extends AsyncTaskLoader<Void> {
      * @return Always returns null.
      */
     @Override
-    public Void loadInBackground() {
+    public Boolean loadInBackground() {
         // Download friends data.
-        Downloader.setFriendsData(mMainUser);
+        Boolean friendDataExists = Downloader.setFriendsData(mMainUser);
 
         // Loop over friends getting their image
         for (SteamFriend friend : mMainUser.getFriendsList()) {
             // Download user image if required and set it
             Downloader.downloadAndSaveUserImage(friend, getContext());
         }
-        return null;
+        return friendDataExists;
     }
 }

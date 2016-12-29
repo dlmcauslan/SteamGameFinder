@@ -12,7 +12,7 @@ import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Downloader;
  * Loader class which is used to download the users data, and save their profile picture to disk.
  */
 
-public class MainUserLoader extends AsyncTaskLoader<Void> {
+public class MainUserLoader extends AsyncTaskLoader<Boolean> {
 
     private MainUser mMainUser;
 
@@ -40,13 +40,15 @@ public class MainUserLoader extends AsyncTaskLoader<Void> {
      * @return Always returns null.
      */
     @Override
-    public Void loadInBackground() {
+    public Boolean loadInBackground() {
         // Download main user data.
-        Downloader.setUserData(mMainUser);
-        Log.v("UserName Loader", mMainUser.getUserName());
+        Boolean userExists = Downloader.setUserData(mMainUser);
+        if (userExists) {
+            Log.v("UserName Loader", mMainUser.getUserName());
 
-        // Download user image if required and set it
-        Downloader.downloadAndSaveUserImage(mMainUser, getContext());
-        return null;
+            // Download user image if required and set it
+            Downloader.downloadAndSaveUserImage(mMainUser, getContext());
+        }
+        return userExists;
     }
 }
