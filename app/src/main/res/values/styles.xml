@@ -10,10 +10,6 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="FriendListStyle">
-        <item name="android:choiceMode">multipleChoice</item>
-    </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

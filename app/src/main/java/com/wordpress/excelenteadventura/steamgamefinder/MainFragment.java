@@ -288,8 +288,14 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             // Hide loading indicator
             View loadingIndicator = mFragmentView.findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
-            // Set friends data
-            setFriendsData();
+            if (!b) {
+                Log.d(LOG_TAG, "Friend loader returned false");
+                // update empty state with no connection error message
+                mEmptyStateTextView.setText(R.string.no_friend_data);
+            } else {
+                // Set friends data
+                setFriendsData();
+            }
         }
     }
 

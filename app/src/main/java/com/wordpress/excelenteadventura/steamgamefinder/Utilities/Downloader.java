@@ -136,7 +136,7 @@ public final class Downloader {
      * Sets the player game data from web.
      * @param user - a SteamUser object to add the data too.
      */
-    public static void setGameData(SteamUser user) {
+    public static Boolean setGameData(SteamUser user) {
         Map<String, SteamGame> gameMap = new HashMap<String, SteamGame>();
         
         // Gets the URL containing the users game data.
@@ -151,7 +151,7 @@ public final class Downloader {
             // If dataObject is null, log it, show a toast, and return null.
             if (dataObject == null) {
                 Log.v(LOG_TAG, "JSON object returned was null");
-                return;
+                return false;
             }
             Log.d(LOG_TAG, urlString);
 
@@ -176,10 +176,11 @@ public final class Downloader {
             // If IOException, returns without setting user data
             String errorMessage = "Error getting game data.";
             Log.e(LOG_TAG, errorMessage, e);
-            return;
+            return false;
         }
         // Set the gameMap to the user.
         user.setGameMap(gameMap);
+        return true;
     }
 
     /**

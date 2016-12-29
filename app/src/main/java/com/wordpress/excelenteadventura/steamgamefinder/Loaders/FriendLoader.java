@@ -44,11 +44,12 @@ public class FriendLoader extends AsyncTaskLoader<Boolean> {
     public Boolean loadInBackground() {
         // Download friends data.
         Boolean friendDataExists = Downloader.setFriendsData(mMainUser);
-
-        // Loop over friends getting their image
-        for (SteamFriend friend : mMainUser.getFriendsList()) {
-            // Download user image if required and set it
-            Downloader.downloadAndSaveUserImage(friend, getContext());
+        if (friendDataExists) {
+            // Loop over friends getting their image
+            for (SteamFriend friend : mMainUser.getFriendsList()) {
+                // Download user image if required and set it
+                Downloader.downloadAndSaveUserImage(friend, getContext());
+            }
         }
         return friendDataExists;
     }

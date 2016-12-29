@@ -164,7 +164,10 @@ public class GamesInCommonFragment extends Fragment implements LoaderManager.Loa
         View loadingIndicator = mFragmentView.findViewById(R.id.games_loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
         // If number of games in common is 0, set the empty state to reflect this. Otherwise set games data
-        if (gamesInCommon.size() == 0) {
+        if (gamesInCommon == null) {
+            mEmptyStateTextView.setText(R.string.no_games_data);
+        }
+        else if (gamesInCommon.size() == 0) {
             mEmptyStateTextView.setText(R.string.no_games_in_common);
         } else {
             // Set games data

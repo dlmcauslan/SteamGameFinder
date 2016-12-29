@@ -48,16 +48,20 @@ public class GameLoader extends AsyncTaskLoader<List<SteamGame>> {
     @Override
     public List<SteamGame> loadInBackground() {
         // Download main user game data
-        Downloader.setGameData(mMainUser);
+        Boolean gameDataExists = Downloader.setGameData(mMainUser);
 
-        // Get games in common
-        List<SteamGame> gamesInCommon = mMainUser.getGamesInCommon(mFriendsToCompare);
+        if (!gameDataExists) {
+            return null;
+        } else {
+            // Get games in common
+            List<SteamGame> gamesInCommon = mMainUser.getGamesInCommon(mFriendsToCompare);
 
-        // Loop over games getting their image
-        for (SteamGame game : gamesInCommon) {
-            // Download game banner image if required and set it
-            Downloader.downloadAndSaveGameImage(game, getContext());
+            // Loop over games getting their image
+            for (SteamGame game : gamesInCommon) {
+                // Download game banner image if required and set it
+                Downloader.downloadAndSaveGameImage(game, getContext());
+            }
+            return gamesInCommon;
         }
-        return gamesInCommon;
     }
 }
