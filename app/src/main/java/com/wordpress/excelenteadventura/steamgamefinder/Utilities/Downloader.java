@@ -50,7 +50,7 @@ public final class Downloader {
         String urlString = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" 
                 + APIKey + "&steamids=" + user.getID() + "&format=json";
 
-//        Log.v(LOG_TAG, urlString);
+        Log.v(LOG_TAG, urlString);
         URL playerSummaryData = createUrl(urlString);
         
         // Make Http request and set user data from the returned JSON object

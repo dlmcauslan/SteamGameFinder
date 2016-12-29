@@ -100,7 +100,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         mFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
 
         // Load the main users userName and image from sharedPrefs
-//        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String userName = prefs.getString(getString(R.string.pref_main_username),"");
         String imageFileName = prefs.getString(getString(R.string.pref_main_image_filename),"");
@@ -112,7 +111,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
         // Create main user
         String mainUserID = prefs.getString(getString(R.string.pref_main_userID),getString(R.string.setting_default_user_ID));
-//        String mainUserID = "76561198020975978";    // This is temporary, will be added as a setting later.
         mMainUser = new MainUser(mainUserID);
 
 
@@ -159,7 +157,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         if (networkInfo != null && networkInfo.isConnected()) {
             // Get a reference to the LoaderManager
             LoaderManager loaderManager = getLoaderManager();
-
             // Initialize the mainUserLoader
             loaderManager.initLoader(MAIN_USER_LOADER, null, this);
 
@@ -215,11 +212,6 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 } else {
                     mFriendCompare.put(friend.getID(), friend);
                 }
-                // Log statements to check map
-                Log.d(LOG_TAG, "FriendsCompare Map.");
-                for (SteamFriend fr : mFriendCompare.values()) {
-                    Log.d(LOG_TAG, fr.getUserName());
-                }
             }
         });
     }
@@ -249,24 +241,26 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoadFinished(Loader<Boolean> loader, Boolean b) {
         if (loader.getId() == MAIN_USER_LOADER) {
-            // If user data not found, pop up a toast to let them know the userID is incorrect
+            // If user data not found, set the background message to let them know the userID is incorrect
             // and don't change the user data
             if (!b) {
                 Log.d(LOG_TAG, "Main user loader returned false");
                 // Set loading indicator to gone
                 View loadingIndicator = mFragmentView.findViewById(R.id.loading_indicator);
                 loadingIndicator.setVisibility(View.GONE);
-                // update empty state with no connection error message
+                // update empty state with no user data message
                 mEmptyStateTextView.setText(R.string.incorrect_userID);
             } else {
                 // Set main user data only if the downloaded data is different than that in the sharedPrefs
                 String userName = mMainUser.getUserName();
                 String imageFileName = Utilities.urlToFilename(mMainUser.getProfilePicture());
                 String userID = mMainUser.getID();
+
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 String prefsUserName = prefs.getString(getString(R.string.pref_main_username), "");
                 String prefsImageFileName = prefs.getString(getString(R.string.pref_main_image_filename), "");
                 String prefsUserID = prefs.getString(getString(R.string.pref_main_userID), getString(R.string.setting_default_user_ID));
+
                 Log.d(LOG_TAG, userID + " " + prefsUserID);
                 Log.d(LOG_TAG, userName + " " + prefsUserName);
 

@@ -18,6 +18,12 @@
     <!--Settings Menu Strings-->
     <string name="settings_menu_item">Settings</string>
     <string name="settings_user_ID">Steam User ID</string>
-    <string name="setting_default_user_ID">76561198020975978</string>
+    <string name="setting_default_user_ID">-1</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="login_title">Steam User ID</string>
+    <string name="login_button">LOG IN</string>
+    <string name="login_help">Need help finding your ID?</string>
 
 </resources>

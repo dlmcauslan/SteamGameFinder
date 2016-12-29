@@ -23,4 +23,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="StartupTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/startup</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 </resources>
