@@ -7,15 +7,19 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Get a reference to the LoaderManager
+        // Get a reference to the LoaderManager callbacks
         mLoaderCallbacks = this;
 
         // Setup Login Button to check user data and open main activity
@@ -56,22 +60,91 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
                 // If there is a network connection fetch data, otherwise display error
                 if (networkInfo != null && networkInfo.isConnected()) {
-                    LoaderManager loaderManager = getLoaderManager();
-
                     // Initialize the mainUserLoader
-                    loaderManager.restartLoader(MAIN_USER_LOADER, null, mLoaderCallbacks);
-
+                    getLoaderManager().restartLoader(MAIN_USER_LOADER, null, mLoaderCallbacks);
                 } else {
-//                    // Set loading indicator to gone
-//                    View loadingIndicator = mFragmentView.findViewById(R.id.loading_indicator);
-//                    loadingIndicator.setVisibility(View.GONE);
                     // Popup toast with no connection error message
                     Toast.makeText(getApplicationContext(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
-//                    mEmptyStateTextView.setText(R.string.no_internet_connection);
                 }
             }
         });
+
+
+        // Popup to explain how to find steam ID
+        final LinearLayout mLayout = (LinearLayout) findViewById(R.id.activity_login);
+        TextView helpText = (TextView) findViewById(R.id.login_help);
+
+        // Set a click listener for the text view
+        helpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(LOG_TAG, "Text clicked");
+                // Initialize a new instance of LayoutInflater service
+                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+                // Inflate the popup view
+                View popupView = inflater.inflate(R.layout.help_popup, null);
+
+                /*
+                    public PopupWindow (View contentView, int width, int height)
+                        Create a new non focusable popup window which can display the contentView.
+                        The dimension of the window must be passed to this constructor.
+
+                        The popup does not provide any background. This should be handled by
+                        the content view.
+
+                    Parameters
+                        contentView : the popup's content
+                        width : the popup's width
+                        height : the popup's height
+                */
+                // Initialize a new instance of popup window
+                final PopupWindow mPopupWindow = new PopupWindow(popupView, android.app.ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+
+                // Set an elevation value for popup window
+                // Call requires API level 21
+                if(Build.VERSION.SDK_INT>=21){
+                    mPopupWindow.setElevation(5.0f);
+                }
+
+                // When clicking on the background login activity close the popup
+                mLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Dismiss the popup window
+                        mPopupWindow.dismiss();
+                    }
+                });
+
+                // When clicking on the popup close it
+                popupView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Dismiss the popup window
+                        mPopupWindow.dismiss();
+                    }
+                });
+
+                /*
+                    public void showAtLocation (View parent, int gravity, int x, int y)
+                        Display the content view in a popup window at the specified location. If the
+                        popup window cannot fit on screen, it will be clipped.
+                        Learn WindowManager.LayoutParams for more information on how gravity and the x
+                        and y parameters are related. Specifying a gravity of NO_GRAVITY is similar
+                        to specifying Gravity.LEFT | Gravity.TOP.
+
+                    Parameters
+                        parent : a parent view to get the getWindowToken() token from
+                        gravity : the gravity which controls the placement of the popup window
+                        x : the popup's x location offset
+                        y : the popup's y location offset
+                */
+                // Finally, show the popup window at the center location of root relative layout
+                mPopupWindow.showAtLocation(mLayout, Gravity.CENTER,0,0);
+            }
+        });
     }
+
 
 
     /**
@@ -92,19 +165,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     /**
      * Set the data after the loader has finished downloading it.
      * @param loader
-     * @param b
+     * @param downloadSuccessful Boolean whether the data was downloaded successfully or not.
      */
     @Override
-    public void onLoadFinished(Loader<Boolean> loader, Boolean b) {
+    public void onLoadFinished(Loader<Boolean> loader, Boolean downloadSuccessful) {
         if (loader.getId() == MAIN_USER_LOADER) {
             // If user data not found, pop up a toast to let them know the userID is incorrect
-            if (!b) {
+            if (!downloadSuccessful) {
                 Log.d(LOG_TAG, "Main user loader returned false");
-//                // Set loading indicator to gone
-//                View loadingIndicator = mFragmentView.findViewById(R.id.loading_indicator);
-//                loadingIndicator.setVisibility(View.GONE);
-                // Create toast with incorrect UserID message.
-//                Toast.makeText(getApplicationContext(), R.string.incorrect_userID, Toast.LENGTH_SHORT).show();
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.incorrect_userID, Toast.LENGTH_SHORT);
                     LinearLayout layout = (LinearLayout) toast.getView();
                     if (layout.getChildCount() > 0) {
@@ -128,7 +196,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             }
         }
     }
-
 
     @Override
     public void onLoaderReset(Loader<Boolean> loader) {

@@ -25,5 +25,8 @@
     <string name="login_title">Steam User ID</string>
     <string name="login_button">LOG IN</string>
     <string name="login_help">Need help finding your ID?</string>
+    <string name ="login_help_description">
+        1) Open up Steam.\n\n2) Click Steam > Settings > Interface.\n\n3) Tick the box \"Display Steam URL address bar when available\".\n\n4) Click OK.\n\n5) In Steam, click on YOUR USERNAME > PROFILE.\n\n6) The Steam address bar should show your profile address. The last 17 numbers of the address are your Steam ID.
+    </string>
 
 </resources>
