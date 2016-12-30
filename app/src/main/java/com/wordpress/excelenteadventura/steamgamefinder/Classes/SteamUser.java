@@ -31,8 +31,20 @@ public class SteamUser implements Comparable<SteamUser>, Serializable {
     public SteamUser(String steamID) {
         this.steamID = steamID;
     }
-    
-    
+
+
+    /**
+     * Class constructor
+     * @param user
+     */
+    public SteamUser(SteamUser user) {
+        this.steamID = user.getID();
+        this.userName = user.getUserName();
+        this.onlineStatus = getOnlineStatus();
+        this.profilePicture = getProfilePicture();
+        this.gameMap = getGameMap();
+    }
+
     /**
      * Getter for users steam ID
      * @return string containing steamID
@@ -125,6 +137,7 @@ public class SteamUser implements Comparable<SteamUser>, Serializable {
      * @return a new HashMap of the users games
      */
     public Map<String, SteamGame> getGameMap() {
+        if (gameMap == null) return null;
         return new HashMap<String, SteamGame>(gameMap);
     }
     

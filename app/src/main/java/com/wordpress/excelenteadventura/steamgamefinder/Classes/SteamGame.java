@@ -1,6 +1,6 @@
 package com.wordpress.excelenteadventura.steamgamefinder.Classes;
 
-import java.net.MalformedURLException;
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -9,7 +9,7 @@ import java.util.Comparator;
  *  and the number of minutes played by the user
  *  @author DLMcAuslan
  */
-public class SteamGame implements Comparable<SteamGame>{
+public class SteamGame implements Comparable<SteamGame>, Serializable {
     private final String gameName;
     private int minutesPlayed;
     private String gameID;
@@ -25,7 +25,19 @@ public class SteamGame implements Comparable<SteamGame>{
     public SteamGame(String gameName) {
         this.gameName = gameName;
     }
-    
+
+    /**
+     * Class constructor
+     * @param game - Steam game object to create new object from.
+     */
+    public SteamGame(SteamGame game) {
+        gameName = game.getName();
+        minutesPlayed = game.getMinutesPlayed();
+        gameID = game.getID();
+        gameIcon = game.getIcon();
+        gameBanner = game.getBanner();
+    }
+
     /**
      * Getter for gameName
      * @return the name of the Game
@@ -50,33 +62,33 @@ public class SteamGame implements Comparable<SteamGame>{
         return minutesPlayed;
     }
     
-    /**
-     * Gets the amount of time the user has played.
-     * @return a string containing the amount of time played in days, hours, minutes.
-     */
-    public String getTimePlayed() {
-        int days = minutesPlayed / (24 * 60);
-        int hours = minutesPlayed % (24 * 60) / (60);
-        int minutes = minutesPlayed % 60;
-        
-        String timeString;
-        String dayString;
-        String hourString;
-        String minuteString;
-        
-        if (days == 1) dayString = days + " day, ";
-        else dayString = days + " days, ";
-        if (hours == 1) hourString = hours + " hour, ";
-        else hourString = hours + " hours, ";
-        if (minutes == 1) minuteString = minutes + " minute.";
-        else minuteString = minutes + " minutes.";
-        
-        if (days == 0) timeString = hourString + minuteString;
-        if (days == 0 && hours == 0) timeString =  minuteString;
-        else timeString = dayString + hourString + minuteString;
-        
-        return timeString;
-    }
+//    /**
+//     * Gets the amount of time the user has played.
+//     * @return a string containing the amount of time played in days, hours, minutes.
+//     */
+//    public String getTimePlayed() {
+//        int days = minutesPlayed / (24 * 60);
+//        int hours = minutesPlayed % (24 * 60) / (60);
+//        int minutes = minutesPlayed % 60;
+//
+//        String timeString;
+//        String dayString;
+//        String hourString;
+//        String minuteString;
+//
+//        if (days == 1) dayString = days + " day, ";
+//        else dayString = days + " days, ";
+//        if (hours == 1) hourString = hours + " hour, ";
+//        else hourString = hours + " hours, ";
+//        if (minutes == 1) minuteString = minutes + " minute.";
+//        else minuteString = minutes + " minutes.";
+//
+//        if (days == 0) timeString = hourString + minuteString;
+//        if (days == 0 && hours == 0) timeString =  minuteString;
+//        else timeString = dayString + hourString + minuteString;
+//
+//        return timeString;
+//    }
     
     /**
      * Setter for gameID
@@ -114,9 +126,8 @@ public class SteamGame implements Comparable<SteamGame>{
     /**
      * Setter for the games Banner
      * @param address - string containing URL where the game Banner is stored online.
-     * @throws MalformedURLException
      */
-    public void setBanner(String address) throws MalformedURLException {
+    public void setBanner(String address) {
         if (address == null) throw new java.lang.NullPointerException();
         gameBanner = BASE_IMAGE_URL + getID() + "/" + address + ".jpg";
     }

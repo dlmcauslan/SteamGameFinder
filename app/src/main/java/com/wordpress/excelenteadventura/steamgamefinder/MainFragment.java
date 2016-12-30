@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wordpress.excelenteadventura.steamgamefinder.Adapters.FriendsListAdapter;
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.MainUser;
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamFriend;
 import com.wordpress.excelenteadventura.steamgamefinder.Loaders.FriendLoader;
@@ -236,14 +237,14 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     /**
      * Set the data after the loader has finished downloading it.
      * @param loader
-     * @param b
+     * @param downloadSuccessful Boolean whether the data was downloaded successfully or not.
      */
     @Override
-    public void onLoadFinished(Loader<Boolean> loader, Boolean b) {
+    public void onLoadFinished(Loader<Boolean> loader, Boolean downloadSuccessful) {
         if (loader.getId() == MAIN_USER_LOADER) {
             // If user data not found, set the background message to let them know the userID is incorrect
             // and don't change the user data
-            if (!b) {
+            if (!downloadSuccessful) {
                 Log.d(LOG_TAG, "Main user loader returned false");
                 // Set loading indicator to gone
                 View loadingIndicator = mFragmentView.findViewById(R.id.loading_indicator);
@@ -282,7 +283,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             // Hide loading indicator
             View loadingIndicator = mFragmentView.findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
-            if (!b) {
+            if (!downloadSuccessful) {
                 Log.d(LOG_TAG, "Friend loader returned false");
                 // update empty state with no connection error message
                 mEmptyStateTextView.setText(R.string.no_friend_data);

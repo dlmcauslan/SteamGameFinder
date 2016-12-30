@@ -12,8 +12,7 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Get userID shared prefs
-        // Load the main users userName and image from sharedPrefs
+        // Load the main users ID from sharedPrefs
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String userID = prefs.getString(getString(R.string.pref_main_userID),getString(R.string.setting_default_user_ID));
 

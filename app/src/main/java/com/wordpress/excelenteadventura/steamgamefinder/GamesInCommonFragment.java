@@ -11,11 +11,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.wordpress.excelenteadventura.steamgamefinder.Adapters.GamesListAdapter;
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.MainUser;
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamGame;
+import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamGameCombined;
 import com.wordpress.excelenteadventura.steamgamefinder.Loaders.GameLoader;
 
 import java.util.List;
@@ -106,34 +109,28 @@ public class GamesInCommonFragment extends Fragment implements LoaderManager.Loa
     private void setGamesData(List<SteamGame> gamesInCommon) {
 
         // Create a new gameslist adapter whose source is a list of Steam Games.
-        GamesListAdapter mGamesAdapter = new GamesListAdapter(getActivity(), gamesInCommon);
+        final GamesListAdapter mGamesAdapter = new GamesListAdapter(getActivity(), gamesInCommon);
 
         // Get a reference to the listview and attach the adapter to it.
         ListView listView = (ListView) mFragmentView.findViewById(R.id.games_list_view);
         listView.setAdapter(mGamesAdapter);
 
-//        // Set onClickListener for listview. Not sure if I want it here or in the onCreateView method
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                // Get the friend object related to the clicked item
-//                SteamFriend friend = mGamesAdapter.getItem(position);
-//                // If the friend is not in the friendCompare map add them, otherwise remove them.
-//                // Background colour is changed in touch_selector.xml and styles.xml files
-//                if (mFriendCompare.containsKey(friend.getID())) {
-//                    mFriendCompare.remove(friend.getID());
-//                } else {
-//                    mFriendCompare.put(friend.getID(), friend);
-//                }
-//                // Although will have to see how this works, because the comparisson should be done in the next activity
-//                // so a loading indicator can be displayed.
-//                // Log statements to check map
-//                Log.d(LOG_TAG, "FriendsCompare Map.");
-//                for (SteamFriend fr : mFriendCompare.values()) {
-//                    Log.d(LOG_TAG, fr.getUserName());
-//                }
-//            }
-//        });
+        // Set onClickListener for listview.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Get the steam game combined object related to the clicked item
+                SteamGame game = mGamesAdapter.getItem(position);
+                SteamGameCombined gameCombined = mMainUser.getGamesInCommonMap().get(game.getName());
+
+                // Create an intent that passes the combined game through to the gameSummary activity.
+                Intent intent = new Intent(getActivity(), GameSummaryActivity.class);
+                // Set data on the intent to be passed through
+                intent.putExtra("GameCombined", gameCombined);
+                // Start intent
+                startActivity(intent);
+            }
+        });
     }
 
 

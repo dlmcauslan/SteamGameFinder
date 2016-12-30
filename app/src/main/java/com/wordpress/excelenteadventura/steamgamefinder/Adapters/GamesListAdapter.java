@@ -1,4 +1,4 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamGame;
+import com.wordpress.excelenteadventura.steamgamefinder.R;
 import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Utilities;
 
 import java.util.List;
@@ -54,8 +55,8 @@ public class GamesListAdapter extends ArrayAdapter<SteamGame> {
         // Populate the two text views - users name and online status
         TextView friendName = (TextView) listItemView.findViewById(R.id.text_game_name);
         friendName.setText(currentGame.getName());
-        TextView onlineStatus = (TextView) listItemView.findViewById(R.id.text_game_time_played);
-        onlineStatus.setText(currentGame.getTimePlayed());
+        TextView timePlayed = (TextView) listItemView.findViewById(R.id.text_game_time_played);
+        timePlayed.setText(Utilities.getTimePlayed(currentGame.getMinutesPlayed()));
 
         // Return the whole list item layout so that it can be shown in the listview.
         return listItemView;

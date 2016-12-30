@@ -108,4 +108,32 @@ public final class Utilities {
         }
     }
 
+    /**
+     * Converts a time in minutes to days, hours, minutes.
+     * @return a string containing the amount of time played in days, hours, minutes.
+     */
+    public static String getTimePlayed(int minutesPlayed) {
+        int days = minutesPlayed / (24 * 60);
+        int hours = minutesPlayed % (24 * 60) / (60);
+        int minutes = minutesPlayed % 60;
+
+        String timeString;
+        String dayString;
+        String hourString;
+        String minuteString;
+
+        if (days == 1) dayString = days + " day, ";
+        else dayString = days + " days, ";
+        if (hours == 1) hourString = hours + " hour, ";
+        else hourString = hours + " hours, ";
+        if (minutes == 1) minuteString = minutes + " minute.";
+        else minuteString = minutes + " minutes.";
+
+        if (days == 0) timeString = hourString + minuteString;
+        if (days == 0 && hours == 0) timeString =  minuteString;
+        else timeString = dayString + hourString + minuteString;
+
+        return timeString;
+    }
+
 }

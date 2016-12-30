@@ -54,7 +54,8 @@ public class GameLoader extends AsyncTaskLoader<List<SteamGame>> {
             return null;
         } else {
             // Get games in common
-            List<SteamGame> gamesInCommon = mMainUser.getGamesInCommon(mFriendsToCompare);
+             mMainUser.findGamesInCommon(mFriendsToCompare);
+            List<SteamGame> gamesInCommon = mMainUser.getGamesInCommonList();
 
             // Loop over games getting their image
             for (SteamGame game : gamesInCommon) {

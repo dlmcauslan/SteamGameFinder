@@ -1,4 +1,4 @@
-package com.wordpress.excelenteadventura.steamgamefinder;
+package com.wordpress.excelenteadventura.steamgamefinder.Adapters;
 
 import android.app.Activity;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wordpress.excelenteadventura.steamgamefinder.Classes.SteamFriend;
+import com.wordpress.excelenteadventura.steamgamefinder.R;
 import com.wordpress.excelenteadventura.steamgamefinder.Utilities.Utilities;
 
 import java.util.ArrayList;
