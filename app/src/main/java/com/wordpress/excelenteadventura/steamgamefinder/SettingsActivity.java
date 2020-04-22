@@ -2,7 +2,7 @@ package com.wordpress.excelenteadventura.steamgamefinder;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
     private static final String LOG_TAG = SettingsActivity.class.getSimpleName();
